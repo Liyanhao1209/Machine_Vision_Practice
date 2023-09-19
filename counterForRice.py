@@ -12,7 +12,7 @@ gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度处理
 cv2.imshow('GrayImg', gray_img)
 cv2.waitKey(0)
 # threshold:阈值 the value between 120 and 255 convert to 1,the others convert to 0
-ret, th1 = cv2.threshold(gray_img, 120, 255, cv2.THRESH_BINARY)
+ret, th1 = cv2.threshold(gray_img, 117, 255, cv2.THRESH_BINARY)
 cv2.imshow('Threshold', th1)
 cv2.waitKey(0)
 erosion = cv2.erode(th1, kernel, iterations=1)  # 腐蚀
@@ -28,32 +28,21 @@ ret, th2 = cv2.threshold(dist_output * 80, 0.3, 255, cv2.THRESH_BINARY)
 cv2.imshow('Threshold', th2)
 cv2.waitKey(0)
 kernel = np.ones((5, 5), np.uint8)
-opening = cv2.morphologyEx(th2, cv2.MORPH_OPEN, kernel)
+opening = cv2.morphologyEx(th2, cv2.MORPH_CLOSE, kernel)
 cv2.imshow('Opening', opening)
 cv2.waitKey(0)
 opening = np.array(opening, np.uint8)
 contours, hierarchy = cv2.findContours(opening, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # 轮廓提取
 count = 0
-# for cnt in contours:
-# 	(x, y), radius = cv2.minEnclosingCircle(cnt)
-# 	center = (int(x)-15, int(y))
-# 	radius = int(radius)
-# 	circle_img = cv2.circle(opening, center, radius, (255, 255, 255), 1)
-# 	area = cv2.contourArea(cnt)
-# 	area_circle = 3.14 * radius * radius
-# 	# print(area/area_circle)
-# 	if area / area_circle <= 0.5:
-# 		# img = cv2.drawContours(img, cnt, -1, (0,0,255), 5)#差（红色）
-# 		img = cv2.putText(img, 'bad', center, font, 0.5, (0, 0, 255))
-# 	elif area / area_circle >= 0.6:
-# 		# img = cv2.drawContours(img, cnt, -1, (0,255,0), 5)#优（绿色）
-# 		img = cv2.putText(img, 'good', center, font, 0.5, (0, 0, 255))
-# 	else:
-# 		# img = cv2.drawContours(img, cnt, -1, (255,0,0), 5)#良（蓝色）
-# 		img = cv2.putText(img, 'normal', center, font, 0.5, (0, 0, 255))
-# 	count += 1
-# img = cv2.putText(img, ('sum=' + str(count)), (50, 50), font, 1, (255, 0, 0))
-# cv2.imshow('circle_img', img)
-# cv2.waitKey(0)
-print('大米粒数量：', contours.__len__())
+for cnt in contours:
+    (x,y),radius = cv2.minEnclosingCircle(cnt)
+    center = (int(x),int(y))
+    img = cv2.putText(img,str(count),center,font,0.4,(0,0,255))
+    count+=1
+img = cv2.putText(img, ('sum=' + str(count)), (50, 50), font, 1, (255, 0, 0))
+cv2.imshow('circle_img', img)
+cv2.waitKey(0)
+# print('大米粒数量：', contours.__len__())
+print('大米粒数量：',count)
 cv2.destroyAllWindows()
+
