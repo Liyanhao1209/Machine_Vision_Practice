@@ -25,7 +25,7 @@ dist_output = cv2.normalize(dist_img, 0, 1.0, cv2.NORM_MINMAX)  # 归一化
 cv2.imshow('Normalize', dist_output * 80)
 cv2.waitKey(0)
 ret, th2 = cv2.threshold(dist_output * 80, 0.3, 255, cv2.THRESH_BINARY)
-cv2.imshow('Threshold', th2)
+cv2.imshow('ThresholdAfterNormalize', th2)
 cv2.waitKey(0)
 kernel = np.ones((5, 5), np.uint8)
 opening = cv2.morphologyEx(th2, cv2.MORPH_OPEN, kernel)
