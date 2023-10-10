@@ -52,7 +52,7 @@ model.save_weights('cnn.mnist')
 model.load_weights('cnn.mnist')
 
 # Predict on the first 8 test images.
-predictions = model.predict(X_train[:10])
+predictions = model.predict(X_test[:10])
 
 # Print our model's predictions.
 print('model''s predictions')
@@ -60,4 +60,4 @@ print(np.argmax(predictions, axis=1))
 
 # Check our predictions against the ground truths.
 print('checker')
-print(X_test[:10])
+print(y_test[:10])
