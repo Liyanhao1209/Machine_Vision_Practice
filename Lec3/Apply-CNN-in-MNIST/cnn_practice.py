@@ -7,6 +7,7 @@ import tensorflow._api.v2.compat.v1 as tf
 import keras
 from keras.datasets import mnist
 import matplotlib.pyplot as plt
+import cv2
 tf.disable_v2_behavior()
 
 # --------------------------------Preparing data--------------------------------
@@ -18,7 +19,9 @@ tf.disable_v2_behavior()
 img_x, img_y = X_train.shape[1], X_train.shape[2]
 
 
-plt.imshow(X_train[0])
+# plt.imshow(X_train[1])
+# plt.show()
+
 
 X_train = X_train.reshape(X_train.shape[0], img_x, img_y, 1)
 X_test = X_test.reshape(X_test.shape[0], img_x, img_y, 1)
@@ -48,11 +51,11 @@ model.fit(X_train, y_train, batch_size=128, epochs=10)
 #评估模型
 score = model.evaluate(X_test, keras.utils.to_categorical(y_test, num_classes=10))
 print('acc', score[1])
-#Save the model to disk.
-model.save_weights('cnn.mnist')
-
-#Load the model from disk later using:
-model.load_weights('cnn.mnist')
+# #Save the model to disk.
+model.save('cnn.h5')
+#
+# #Load the model from disk later using:
+# model.load_weights('cnn.mnist')
 
 # Predict on the first 8 test images.
 predictions = model.predict(X_test[:10])
