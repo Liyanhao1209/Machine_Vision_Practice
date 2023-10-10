@@ -1,3 +1,5 @@
 .idea
 venv
 main.py
+build/
+dist/
