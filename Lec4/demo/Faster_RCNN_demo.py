@@ -34,15 +34,19 @@ predictions = model(tensor_data)
 # print(predictions)
 
 coco_labels_name = ["unlabeled", "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat",
-                    "traffic light", "fire hydrant", "street sign", "stop sign", "parking meter", "bench", "bird","cat", "dog", "horse",
+                    "traffic light", "fire hydrant", "street sign", "stop sign", "parking meter", "bench", "bird",
+                    "cat", "dog", "horse",
                     "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "hat", "backpack", "umbrella", "shoe",
                     "eye glasses", "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard", "sports_ball", "kite",
                     "baseball bat",
-                    "baseball glove", "skateboard", "surfboard", "tennis racket", "bottle", "plate", "wine glass","cup", "fork", "knife",
+                    "baseball glove", "skateboard", "surfboard", "tennis racket", "bottle", "plate", "wine glass",
+                    "cup", "fork", "knife",
                     "spoon", "bowl", "banana", "apple", "sandwich", "orange", "broccoli", "carrot", "hot_dog", "pizza",
-                    "donut", "cake", "chair", "couch", "potted plant", "bed", "mirror", "dining table", "window","desk",
+                    "donut", "cake", "chair", "couch", "potted plant", "bed", "mirror", "dining table", "window",
+                    "desk",
                     "toilet", "door", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave", "oven",
-                    "toaster", "sink", "refrigerator", "blender", "book", "clock", "vase", "scissors", "teddy bear","hair drier",
+                    "toaster", "sink", "refrigerator", "blender", "book", "clock", "vase", "scissors", "teddy bear",
+                    "hair drier",
                     "toothbrush", "hair brush"]  # len = 92
 
 for x in range(len(predictions)):
@@ -62,8 +66,9 @@ for x in range(len(predictions)):
         cv2.putText(img, coco_labels_name[labels[idx]] + " " + str(scores[idx].detach().numpy()),
                     (boxes[idx][0] + 10, boxes[idx][1] + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
 
-    cv2.imshow("image", img)
-    cv2.waitKey(1000)
+    # cv2.imshow("image" + str(x), cv2.resize(img, (640, 640)))
+    cv2.imshow("image" + str(x), img)
+    cv2.waitKey(0)
     cv2.imwrite(images_path + "result_" + images_name[x], img)
 
 print("test finish")
