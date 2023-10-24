@@ -66,8 +66,8 @@ for x in range(len(predictions)):
         cv2.putText(img, coco_labels_name[labels[idx]] + " " + str(scores[idx].detach().numpy()),
                     (boxes[idx][0] + 10, boxes[idx][1] + 10), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
 
-    # cv2.imshow("image" + str(x), cv2.resize(img, (640, 640)))
-    cv2.imshow("image" + str(x), img)
+    cv2.imshow("image" + str(x), cv2.resize(img, (640, 640)))
+    # cv2.imshow("image" + str(x), img)
     cv2.waitKey(0)
     cv2.imwrite(images_path + "result_" + images_name[x], img)
 

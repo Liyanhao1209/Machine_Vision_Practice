@@ -1,0 +1,7 @@
+train: C:\work_place\Machine_Vision_Practice\Lec5\kaggle_dataSource\css-data\train\images
+val: C:\work_place\Machine_Vision_Practice\Lec5\kaggle_dataSource\css-data\valid\images
+test: C:\work_place\Machine_Vision_Practice\Lec5\kaggle_dataSource\css-data\test\images
+
+nc: 10
+
+names: [Hardhat, Mask, NO-Hardhat, NO-Mask, NO-Safety Vest, Person, Safety Cone, Safety Vest, machinery, ve]

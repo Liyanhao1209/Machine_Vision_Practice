@@ -3,3 +3,7 @@ venv
 main.py
 build/
 dist/
+Lec5/kaggle_dataSource
+Lec5/runs
+Lec5/test_pics
+Lec5/models
